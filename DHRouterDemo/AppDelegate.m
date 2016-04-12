@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "SecondViewController.h"
-#import "ThirdViewController.h"
 #import "DHRouter.h"
+#import "WebViewController.h"
+#import "ThirdViewController.h"
 
 @interface AppDelegate ()
 
@@ -30,10 +31,11 @@
     
     DHRouter *router = [DHRouter shareManager];
     router.navigationController = nav;
-    router.mySchemes = @[@"CardApp"];
-    [router map:@"CardApp://user/detail" toControllerClass:[ViewController class]];
-    [router map:@"CardApp://order/detail" toControllerClass:[SecondViewController class]];
-    [router map:@"CardApp://card/detail" toControllerClass:[ThirdViewController class]];
+    router.mySchemes = @[@"DHRouter"];
+    router.webViewController = [[WebViewController alloc] init];
+    
+    [router map:@"DHRouter://secondViewController/detail/:testId" toControllerClass:[SecondViewController class]];
+    [router map:@"DHRouter://thirdViewController/detail/:testId" toControllerClass:[ThirdViewController class]];
     
     return YES;
 }

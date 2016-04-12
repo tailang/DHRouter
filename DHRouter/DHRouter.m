@@ -7,6 +7,7 @@
 //
 
 #import "DHRouter.h"
+#import <objc/runtime.h>
 
 @interface DHRouter()
 
@@ -36,6 +37,15 @@
     return [[self alloc] init];
 }
 
+- (void)open:(NSString *)route
+{
+    [self open:route otherParams:nil openStyle:DHRouterOpenStyleStack animation:YES];
+}
+
+- (void)open:(NSString *)route otherParams:(NSDictionary *)otherParams{
+    [self open:route otherParams:otherParams openStyle:DHRouterOpenStyleStack animation:YES];
+}
+
 - (void)open:(NSString *)route otherParams:(NSDictionary *)otherParams openStyle:(DHRouterOpenStyle)openStyle animation:(BOOL)animation
 {
     NSURL *URL = [[NSURL alloc] initWithString:route];
@@ -46,28 +56,38 @@
     }
     
     if ([scheme.lowercaseString isEqualToString:@"http"] || [scheme.lowercaseString isEqualToString:@"https"]) {
-        //TODO: webview
+        if (self.navigationController) {
+            if (self.webViewController) {
+                
+                if ([self classOfPropertyNamed:@"DHRouterURL" propertyclass:[self.webViewController class]] == [NSURL class]) {
+                    [self.webViewController setValue:URL forKey:@"DHRouterURL"];
+                    [self.navigationController pushViewController:self.webViewController animated:animation];
+                }else{
+                    NSAssert(NO, @"the DHRouterURL's class is not NSURL, it should be NSURL");
+                }
+                
+            }else{
+                //用Safari打开网页
+                [[UIApplication sharedApplication] openURL:URL];
+            }
+        }else{
+            NSAssert(NO, @"the router navigationcontroller can not find");
+        }
     }else if ([self.mySchemes containsObject:scheme]) {
         UIViewController *viewController = [self matchControllerFromRoute:route otherParams:otherParams];
         if (self.navigationController) {
             //如果当前页面有modal 先dismiss
             if (self.navigationController.presentedViewController) {
-                [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+                //Q:在present modal和dismiss modal的时候，要异步放入主队列，不然有时要等待2-3s才完成，下同
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController dismissViewControllerAnimated:NO completion:^{
+                        [self viewController:viewController openStyle:openStyle animation:animation];
+                    }];
+                });
+            }else{
+                [self viewController:viewController openStyle:openStyle animation:animation];
             }
             
-            if (openStyle == DHRouterOpenStyleModal) {
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
-                [self.navigationController presentViewController:nav animated:animation completion:^{
-                    
-                }];
-            }else if (openStyle == DHRouterOpenStyleStack) {
-                [self.navigationController pushViewController:viewController animated:animation];
-            }else if (openStyle == DHRouterOpenStyleStackRoot) {
-                [self.navigationController setViewControllers:@[viewController] animated:animation];
-            }else{
-                NSAssert(NO, @"please use true DHRouterOpenStyle");
-            }
-        
         }else{
             NSAssert(NO, @"the router navigationcontroller can not find");
         }
@@ -109,6 +129,20 @@
     subRoutes[@"target"] = controllerClass;
     
     return YES;
+}
+
+- (void)dissMissModalAnimated:(BOOL)animated DHRouterModalDismissCompletionBlock:(void(^)(void))DHRouterModalDismissCompletionBlock
+{
+    if (self.navigationController.presentedViewController) {
+        NSLog(@"start dismiss");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController dismissViewControllerAnimated:animated completion:^{
+                DHRouterModalDismissCompletionBlock();
+            }];
+        });
+
+    }
+    
 }
 
 #pragma mark - private
@@ -174,7 +208,7 @@
             }
         }
     }
-   
+    
     
     return params;
 }
@@ -216,6 +250,46 @@
     }
     
     return routeURL;
+}
+
+- (Class)classOfPropertyNamed:(NSString*) propertyName propertyclass:(Class)propertyclass
+{
+    if (class_getProperty(propertyclass, "DHRouterURL")) {
+        Class propertyClass = nil;
+        objc_property_t property = class_getProperty(propertyclass, [propertyName UTF8String]);
+        NSString *propertyAttributes = [NSString stringWithCString:property_getAttributes(property) encoding:NSUTF8StringEncoding];
+        NSArray *splitPropertyAttributes = [propertyAttributes componentsSeparatedByString:@","];
+        if (splitPropertyAttributes.count > 0)
+        {
+            NSString *encodeType = splitPropertyAttributes[0];
+            NSArray *splitEncodeType = [encodeType componentsSeparatedByString:@"\""];
+            NSString *className = splitEncodeType[1];
+            propertyClass = NSClassFromString(className);
+        }
+        return propertyClass;
+    }else{
+        NSAssert(NO, @"the webViewController don't has DHRouterURL property");
+        return nil;
+    }
+}
+
+- (void)viewController:(UIViewController *)viewController openStyle:(DHRouterOpenStyle)openStyle animation:(BOOL)animation
+{
+    if (openStyle == DHRouterOpenStyleModal) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController presentViewController:nav animated:animation completion:^{
+                
+            }];
+        });
+        
+    }else if (openStyle == DHRouterOpenStyleStack) {
+        [self.navigationController pushViewController:viewController animated:animation];
+    }else if (openStyle == DHRouterOpenStyleStackRoot) {
+        [self.navigationController setViewControllers:@[viewController] animated:animation];
+    }else{
+        NSAssert(NO, @"please use true DHRouterOpenStyle");
+    }
 }
 
 @end

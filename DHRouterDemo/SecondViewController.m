@@ -18,23 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    button.backgroundColor = [UIColor blueColor];
-    [button addTarget:self action:@selector(go:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(10, 100, 100, 100);
-    [self.view addSubview:button];
+    self.title = NSStringFromClass([self class]);
+    self.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)go:(UIButton *)uu
-{
-    [[DHRouter shareManager] open:@"CardApp://card/detail" otherParams:nil openStyle:DHRouterOpenStyleStack animation:YES];
 }
 
 /*

@@ -12,8 +12,9 @@
 		2DA332CD1CB9090D003DB4D2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA332CC1CB9090D003DB4D2 /* ViewController.m */; };
 		2DA332D21CB9090D003DB4D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DA332D11CB9090D003DB4D2 /* Assets.xcassets */; };
 		2DA332E01CB9090D003DB4D2 /* DHRouterDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DA332DF1CB9090D003DB4D2 /* DHRouterDemoTests.m */; };
+		2DACC9601CBCE76D00238520 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DACC95F1CBCE76D00238520 /* WebViewController.m */; };
+		2DACC9621CBCF81700238520 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DACC9611CBCF81700238520 /* ThirdViewController.m */; };
 		2DD5E5BE1CB90B4100D53006 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD5E5BB1CB90B4100D53006 /* SecondViewController.m */; };
-		2DD5E5BF1CB90B4100D53006 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD5E5BD1CB90B4100D53006 /* ThirdViewController.m */; };
 		2DD5E5C51CB90B7100D53006 /* DHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD5E5C21CB90B7100D53006 /* DHRouter.m */; };
 		2DD5E5C61CB90B7100D53006 /* UIViewController+DHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DD5E5C41CB90B7100D53006 /* UIViewController+DHRouter.m */; };
 /* End PBXBuildFile section */
@@ -40,10 +41,12 @@
 		2DA332DB1CB9090D003DB4D2 /* DHRouterDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DHRouterDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DA332DF1CB9090D003DB4D2 /* DHRouterDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DHRouterDemoTests.m; sourceTree = "<group>"; };
 		2DA332E11CB9090D003DB4D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DACC95E1CBCE76D00238520 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		2DACC95F1CBCE76D00238520 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		2DACC9611CBCF81700238520 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		2DACC9631CBCF81E00238520 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		2DD5E5BA1CB90B4100D53006 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		2DD5E5BB1CB90B4100D53006 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		2DD5E5BC1CB90B4100D53006 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
-		2DD5E5BD1CB90B4100D53006 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		2DD5E5C11CB90B7100D53006 /* DHRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHRouter.h; sourceTree = "<group>"; };
 		2DD5E5C21CB90B7100D53006 /* DHRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHRouter.m; sourceTree = "<group>"; };
 		2DD5E5C31CB90B7100D53006 /* UIViewController+DHRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DHRouter.h"; sourceTree = "<group>"; };
@@ -90,14 +93,16 @@
 		2DA332C41CB9090D003DB4D2 /* DHRouterDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2DACC9631CBCF81E00238520 /* ThirdViewController.h */,
+				2DACC9611CBCF81700238520 /* ThirdViewController.m */,
 				2DA332C81CB9090D003DB4D2 /* AppDelegate.h */,
 				2DA332C91CB9090D003DB4D2 /* AppDelegate.m */,
 				2DA332CB1CB9090D003DB4D2 /* ViewController.h */,
 				2DA332CC1CB9090D003DB4D2 /* ViewController.m */,
 				2DD5E5BA1CB90B4100D53006 /* SecondViewController.h */,
 				2DD5E5BB1CB90B4100D53006 /* SecondViewController.m */,
-				2DD5E5BC1CB90B4100D53006 /* ThirdViewController.h */,
-				2DD5E5BD1CB90B4100D53006 /* ThirdViewController.m */,
+				2DACC95E1CBCE76D00238520 /* WebViewController.h */,
+				2DACC95F1CBCE76D00238520 /* WebViewController.m */,
 				2DA332D11CB9090D003DB4D2 /* Assets.xcassets */,
 				2DA332D61CB9090D003DB4D2 /* Info.plist */,
 				2DA332C51CB9090D003DB4D2 /* Supporting Files */,
@@ -232,8 +237,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DD5E5BE1CB90B4100D53006 /* SecondViewController.m in Sources */,
-				2DD5E5BF1CB90B4100D53006 /* ThirdViewController.m in Sources */,
 				2DD5E5C61CB90B7100D53006 /* UIViewController+DHRouter.m in Sources */,
+				2DACC9621CBCF81700238520 /* ThirdViewController.m in Sources */,
+				2DACC9601CBCE76D00238520 /* WebViewController.m in Sources */,
 				2DD5E5C51CB90B7100D53006 /* DHRouter.m in Sources */,
 				2DA332CD1CB9090D003DB4D2 /* ViewController.m in Sources */,
 				2DA332CA1CB9090D003DB4D2 /* AppDelegate.m in Sources */,
@@ -346,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DHRouterDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -358,6 +365,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DHRouterDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
